@@ -56,7 +56,7 @@ class HYAxios {
     )
   }
 
-  request<T>(config: HYAxiosRequestConfig): Promise<T> {
+  request<T>(config: HYAxiosRequestConfig<T>): Promise<T> {
     return new Promise((resolve, reject) => {
       if (config.showLoading) {
         this.showLoading = config.showLoading
@@ -67,12 +67,12 @@ class HYAxios {
       }
 
       this.instance
-        .request(config)
+        .request<any, T>(config)
         .then((res) => {
           if (config.interceptors?.responseInterceptor) {
             res = config.interceptors.responseInterceptor(res)
           }
-          resolve(res.data)
+          resolve(res)
         })
         .catch((err) => {
           reject(err)
@@ -83,25 +83,25 @@ class HYAxios {
         })
     })
   }
-  get<T>(config: HYAxiosRequestConfig): Promise<T> {
+  get<T>(config: HYAxiosRequestConfig<T>): Promise<T> {
     config = Object.assign(config, {
       method: 'get'
     })
     return this.request(config)
   }
-  post<T>(config: HYAxiosRequestConfig): Promise<T> {
+  post<T>(config: HYAxiosRequestConfig<T>): Promise<T> {
     config = Object.assign(config, {
       method: 'post'
     })
     return this.request(config)
   }
-  delete<T>(config: HYAxiosRequestConfig): Promise<T> {
+  delete<T>(config: HYAxiosRequestConfig<T>): Promise<T> {
     config = Object.assign(config, {
       method: 'delete'
     })
     return this.request(config)
   }
-  patch<T>(config: HYAxiosRequestConfig): Promise<T> {
+  patch<T>(config: HYAxiosRequestConfig<T>): Promise<T> {
     config = Object.assign(config, {
       method: 'patch'
     })
