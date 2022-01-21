@@ -4,7 +4,7 @@ import { BASE_URL, TIME_OUT } from './config'
 import { HYAxiosInterceptors, HYAxiosRequestConfig } from './type'
 import { ElLoading } from 'element-plus'
 import { LoadingInstance } from 'element-plus/es/components/loading/src/loading'
-
+import localCache from '@/utils/cache'
 const defaultLoading = false
 
 class HYAxios {
@@ -114,6 +114,12 @@ const http = new HYAxios({
   baseURL: BASE_URL,
   interceptors: {
     requestInterceptor: (config) => {
+      // 携带 token 的拦截
+      const token = localCache.getCache('token')
+      if (token) {
+        config.headers = config.headers || {}
+        config.headers.Authorization = `${token}`
+      }
       return config
     },
     requestInterceptorCatch: (err) => {
