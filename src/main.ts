@@ -8,7 +8,7 @@ import store from './store'
 import { globalRegister } from './global'
 import 'normalize.css'
 import '@/assets/css/index.less'
-
+import '../mock'
 const app = createApp(App)
 
 // or app.use(globalRegister)

@@ -3,11 +3,19 @@ module.exports = {
   devServer: {
     proxy: {
       '^/api': {
-        target: 'www.baidu.com',
+        target: 'http://localhost:8080',
         pathRewrite: {
           '^/api': ''
         },
         changeOrigin: true
+      }
+    }
+  },
+  // 直接配置 webpack 属性
+  configureWebpack: {
+    resolve: {
+      alias: {
+        components: '@/components'
       }
     }
   }

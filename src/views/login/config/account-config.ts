@@ -1,13 +1,13 @@
 // 编写好规则
 export const rules = {
-  name: [
+  username: [
     {
       required: true,
       message: '请输入账号',
       trigger: 'blur'
     },
     {
-      pattern: /^[a-z0-9]{5,10}$/,
+      pattern: /^[a-z0-9]{4,10}$/,
       message: '账号必须是5~10个字母或者数字',
       trigger: 'blur'
     }

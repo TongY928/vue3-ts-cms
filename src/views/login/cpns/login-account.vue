@@ -2,7 +2,7 @@
   <div class="login-account">
     <el-form ref="formRef" label-width="60px" :rules="rules" :model="account">
       <el-form-item label="账号" prop="name">
-        <el-input v-model="account.name" />
+        <el-input v-model="account.username" />
       </el-form-item>
       <el-form-item label="密码" prop="password">
         <el-input v-model="account.password" show-password />
@@ -20,7 +20,7 @@ import { useStore } from 'vuex'
 export default defineComponent({
   setup() {
     const account = reactive({
-      name: '',
+      username: '',
       password: ''
     })
 
@@ -33,10 +33,10 @@ export default defineComponent({
         if (valid) {
           // 1. 判断是否要记录密码
           if (isKeepPassword) {
-            localCache.setCache('name', account.name)
+            localCache.setCache('username', account.username)
             localCache.setCache('password', account.password)
           } else {
-            localCache.deleteCache('name')
+            localCache.deleteCache('username')
             localCache.deleteCache('password')
           }
           // 登录验证

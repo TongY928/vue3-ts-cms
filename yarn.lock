@@ -988,10 +988,10 @@
   "resolved" "https://registry.nlark.com/@ctrl/tinycolor/download/@ctrl/tinycolor-3.4.0.tgz"
   "version" "3.4.0"
 
-"@element-plus/icons-vue@^0.2.4":
-  "integrity" "sha512-ehdyhMwKOg2wwXrjSeU5uQEON4Dhf/4ao4TaVyQSLh6qjPDOeb85uNL89cUU0pYu81Tlmo/oe9leqc5uXMVnEw=="
-  "resolved" "https://registry.npmmirror.com/@element-plus/icons-vue/download/@element-plus/icons-vue-0.2.5.tgz"
-  "version" "0.2.5"
+"@element-plus/icons-vue@^0.2.4", "@element-plus/icons-vue@^0.2.6":
+  "integrity" "sha512-2gg7VCq4d2firgl7/aVym4Cx/wqKFwKybEQGJiiWJN4urW36+QdAEG1knqSD9qidbjhVp0Jnc9XdSTR1/4Whzw=="
+  "resolved" "https://registry.npmmirror.com/@element-plus/icons-vue/download/@element-plus/icons-vue-0.2.6.tgz"
+  "version" "0.2.6"
 
 "@hapi/address@2.x.x":
   "integrity" "sha512-QD1PhQk+s31P1ixsX0H0Suoupp3VMXzIVMSwobR3F3MSUO2YCV0B7xqLcUw/Bh8yuvd3LhpyqLQWTNcRmp6IdQ=="
@@ -1184,6 +1184,11 @@
   "integrity" "sha512-jhuKLIRrhvCPLqwPcx6INqmKeiA5EWrsCOPhrlFSrbrmU4ZMPjj5Ul/oLCMDO98XRUIwVm78xICz4EPCektzeQ=="
   "resolved" "https://registry.npmjs.org/@types/minimist/-/minimist-1.2.2.tgz"
   "version" "1.2.2"
+
+"@types/mockjs@^1.0.6":
+  "integrity" "sha512-Yu5YlqbYZyqsd6LjO4e8ONJDN9pTSnciHDcRP4teNOh/au2b8helFhgRx+3w8xsTFEnwr9jtfTVJbAx+eYmlHA=="
+  "resolved" "https://registry.npmmirror.com/@types/mockjs/download/@types/mockjs-1.0.6.tgz"
+  "version" "1.0.6"
 
 "@types/node@*":
   "integrity" "sha512-YofkM6fGv4gDJq78g4j0mMuGMkZVxZDgtU0JRdx6FgiJDG+0fY0GKVolOV8WqVmEhLCXkQRjwDdKyPxJp/uucg=="
@@ -3007,7 +3012,7 @@
   dependencies:
     "delayed-stream" "~1.0.0"
 
-"commander@^2.12.1", "commander@^2.18.0", "commander@^2.20.0":
+"commander@*", "commander@^2.12.1", "commander@^2.18.0", "commander@^2.20.0":
   "integrity" "sha512-GpVkmM8vF2vQUkj2LvZmD35JxeJOLCwJ9cUkugyk2nuhbv3+mJvpLYYt+0+USMxE+oj+ey/lJEnhZw75x/OMcQ=="
   "resolved" "https://registry.npmjs.org/commander/-/commander-2.20.3.tgz"
   "version" "2.20.3"
@@ -6552,6 +6557,13 @@
   "version" "0.5.5"
   dependencies:
     "minimist" "^1.2.5"
+
+"mockjs@^1.1.0":
+  "integrity" "sha512-eQsKcWzIaZzEZ07NuEyO4Nw65g0hdWAyurVol1IPl1gahRwY+svqzfgfey8U8dahLwG44d6/RwEzuK52rSa/JQ=="
+  "resolved" "https://registry.npmmirror.com/mockjs/download/mockjs-1.1.0.tgz"
+  "version" "1.1.0"
+  dependencies:
+    "commander" "*"
 
 "move-concurrently@^1.0.1":
   "integrity" "sha1-viwAX9oy4LKa8fBdfEszIUxwH5I="

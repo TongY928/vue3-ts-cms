@@ -118,7 +118,7 @@ const http = new HYAxios({
       const token = localCache.getCache('token')
       if (token) {
         config.headers = config.headers || {}
-        config.headers.Authorization = `${token}`
+        config.headers.authorization = `${token}`
       }
       return config
     },

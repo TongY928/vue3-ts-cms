@@ -4,13 +4,15 @@
     <el-tabs type="border-card" stretch>
       <el-tab-pane>
         <template #label>
-          <span><i class="el-icon-user-solid"></i> 账号登录</span>
+          <span class="login-user"><user class="style-icon" /> 账号登录 </span>
         </template>
         <login-account ref="accountRef" />
       </el-tab-pane>
       <el-tab-pane>
         <template #label>
-          <span><i class="el-icon-mobile-phone"></i> 手机登录</span>
+          <span class="login-phone"
+            ><iphone class="style-icon" /> 手机登录</span
+          >
         </template>
         <login-phone />
       </el-tab-pane>
@@ -26,13 +28,16 @@
   </div>
 </template>
 <script lang="ts">
+import { User, Iphone } from '@element-plus/icons-vue'
 import { defineComponent, ref } from 'vue'
 import LoginAccount from './login-account.vue'
 import LoginPhone from './login-phone.vue'
 export default defineComponent({
   components: {
     LoginAccount,
-    LoginPhone
+    LoginPhone,
+    User,
+    Iphone
   },
   setup() {
     const isKeepPassword = ref(true)
@@ -51,14 +56,28 @@ export default defineComponent({
 })
 </script>
 <style lang="less" scoped>
+.style-icon {
+  width: 1em;
+  height: 1em;
+  margin-right: 5px;
+}
+.login-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .login-panel {
   margin-bottom: 150px;
   width: 320px;
-  text-align: center;
-  .title {
+  .panel-title {
     text-align: center;
   }
-
+  .login-user {
+    .login-content();
+  }
+  .login-phone {
+    .login-content();
+  }
   .account-control {
     margin-top: 10px;
     display: flex;

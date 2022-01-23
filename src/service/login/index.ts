@@ -9,16 +9,16 @@ export function accountLoginRequest(account: Account) {
   })
 }
 
-export function requestUserInfoById(id: number) {
+export function requestUserInfo() {
   return hyRequest.get<DataType>({
-    url: `/user/${id}`,
+    url: `/getUserInfo`,
     showLoading: false
   })
 }
 
-export function requestUserMenusByRoleId(id: number) {
+export function requestUserMenus() {
   return hyRequest.get<DataType>({
-    url: `/role/${id}/menu`,
+    url: `/getUserMenu`,
     showLoading: false
   })
 }

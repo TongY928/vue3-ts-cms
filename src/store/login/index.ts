@@ -1,8 +1,8 @@
 import { Module } from 'vuex'
 import {
   accountLoginRequest,
-  requestUserInfoById,
-  requestUserMenusByRoleId
+  requestUserInfo,
+  requestUserMenus
 } from '@/service/login'
 import localCache from '@/utils/cache'
 import router from '@/router'
@@ -20,7 +20,10 @@ const loginModle: Module<LoginState, RootState> = {
       userMenu: []
     }
   },
-  getters: {},
+  getters: {
+    menus: (state) => state.userMenu,
+    info: (state) => state.userInfo
+  },
   mutations: {
     changeToken(state, token: string) {
       state.token = token
@@ -36,18 +39,24 @@ const loginModle: Module<LoginState, RootState> = {
     async accountLoginAction({ commit }, payload: Account) {
       // 1.实现登录逻辑
       const loginResult = await accountLoginRequest(payload)
-      const { id, token } = loginResult.data
+      if (loginResult.code == -1) {
+        return
+      } else {
+        router.push('/main')
+        return
+      }
+      const { token } = loginResult.data
       commit('changeToken', token)
       localCache.setCache('token', token)
 
       // 2.请求用户信息
-      const userInfoResult = await requestUserInfoById(id)
+      const userInfoResult = await requestUserInfo()
       const userInfo = userInfoResult.data
       commit('changeUserInfo', userInfo)
       localCache.setCache('userInfo', userInfo)
 
       // 3.请求用户菜单
-      const userMenusResult = await requestUserMenusByRoleId(userInfo.role.id)
+      const userMenusResult = await requestUserMenus()
       const userMenus = userMenusResult.data
       commit('changeUserMenus', userMenus)
       localCache.setCache('userMenus', userMenus)
