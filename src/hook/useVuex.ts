@@ -1,11 +1,11 @@
-import { computed } from 'vue'
+import { computed, ComputedRef } from 'vue'
 import { Mapper, mapState, createNamespacedHelpers, mapGetters } from 'vuex'
 import { useStore } from '@/store'
 export function useMapper(mapper: string[], mapFn: Mapper<() => any>) {
   const store = useStore()
   const storeStateFns = mapFn(mapper)
 
-  const storeState: Record<string, any> = {}
+  const storeState: Record<string, ComputedRef<any>> = {}
   Object.keys(storeStateFns).forEach((fnKey) => {
     const fn = storeStateFns[fnKey].bind({ $store: store })
     storeState[fnKey] = computed(fn)

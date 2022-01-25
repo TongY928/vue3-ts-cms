@@ -1,5 +1,4 @@
 import { LoginState } from './login/types'
-
 export interface RootState {
   name: string
   age: number

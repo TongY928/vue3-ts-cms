@@ -5,7 +5,7 @@
       <span v-if="!collapse" class="title">Vue3+TS</span>
     </div>
     <el-menu
-      default-active="2"
+      :default-active="defaultValue"
       class="el-menu-vertical"
       :collapse="collapse"
       background-color="#0c2135"
@@ -23,7 +23,10 @@
             </template>
             <!-- 遍历里面的item -->
             <template v-for="subitem in item.children" :key="subitem.id">
-              <el-menu-item :index="subitem.id + ''">
+              <el-menu-item
+                :index="subitem.id + ''"
+                @click="handleMenu(subitem)"
+              >
                 <i v-if="subitem.icon" :class="subitem.icon"></i>
                 <span>{{ subitem.name }}</span>
               </el-menu-item>
@@ -32,7 +35,7 @@
         </template>
         <!-- 一级菜单 -->
         <template v-else-if="item.type === 2">
-          <el-menu-item :index="item.id + ''">
+          <el-menu-item :index="item.id + ''" @click="handleMenu(item)">
             <i v-if="item.icon" :class="item.icon"></i>
             <span>{{ item.name }}</span>
           </el-menu-item>
@@ -43,8 +46,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
 import { useGetters } from '@/hook/useVuex'
+import { useRoute, useRouter } from 'vue-router'
+import { pathMapToMenu } from '@/utils/map-menus'
 export default defineComponent({
   props: {
     collapse: {
@@ -53,9 +58,20 @@ export default defineComponent({
     }
   },
   setup() {
+    const router = useRouter()
+    const route = useRoute()
+    const currentPath = route.path
+
     const { menus: userMenus } = useGetters('login', ['menus'])
+    const menu = pathMapToMenu(userMenus.value, currentPath)
+    const defaultValue = ref(menu.id + '')
+    const handleMenu = (item: any) => {
+      router.push(item.path)
+    }
     return {
-      userMenus
+      userMenus,
+      handleMenu,
+      defaultValue
     }
   }
 })

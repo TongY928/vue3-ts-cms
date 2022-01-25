@@ -1,6 +1,6 @@
 import hyRequest from '@/utils/axios'
 
-import { Account, DataType, LoginResult } from './types'
+import { Account, DataType, LoginResult, Menu } from './types'
 
 export function accountLoginRequest(account: Account) {
   return hyRequest.post<DataType<LoginResult>>({
@@ -9,16 +9,22 @@ export function accountLoginRequest(account: Account) {
   })
 }
 
-export function requestUserInfo() {
+export function requestUserInfo(id: number) {
   return hyRequest.get<DataType>({
     url: `/getUserInfo`,
-    showLoading: false
+    showLoading: false,
+    params: {
+      id
+    }
   })
 }
 
-export function requestUserMenus() {
-  return hyRequest.get<DataType>({
-    url: `/getUserMenu`,
-    showLoading: false
+export function requestUserMenus(roleId: number) {
+  return hyRequest.get<DataType<Menu[]>>({
+    url: `/getUserMenus`,
+    showLoading: false,
+    params: {
+      id: roleId
+    }
   })
 }

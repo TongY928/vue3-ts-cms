@@ -8,21 +8,30 @@ import localCache from '@/utils/cache'
 import router from '@/router'
 
 import { Account } from '@/service/login/types'
-import { LoginState } from './types'
+import { LoginState, Role } from './types'
 import { RootState } from '../types'
-
+import { registerMenus } from '@/utils/map-menus'
 const loginModle: Module<LoginState, RootState> = {
   namespaced: true,
   state() {
     return {
       token: '',
-      userInfo: {},
+      role: {
+        roleId: -1,
+        roleName: '未登录'
+      },
+      userInfo: {
+        id: -1,
+        name: '未登录',
+        phoneNumber: '---'
+      },
       userMenu: []
     }
   },
   getters: {
     menus: (state) => state.userMenu,
-    info: (state) => state.userInfo
+    info: (state) => state.userInfo,
+    role: (state) => state.role
   },
   mutations: {
     changeToken(state, token: string) {
@@ -33,6 +42,10 @@ const loginModle: Module<LoginState, RootState> = {
     },
     changeUserMenus(state, userMenus: any) {
       state.userMenu = userMenus
+      registerMenus(userMenus)
+    },
+    changeRole(state, role: Role) {
+      state.role = role
     }
   },
   actions: {
@@ -41,22 +54,20 @@ const loginModle: Module<LoginState, RootState> = {
       const loginResult = await accountLoginRequest(payload)
       if (loginResult.code == -1) {
         return
-      } else {
-        router.push('/main')
-        return
       }
-      const { token } = loginResult.data
+      const { id, token, role } = loginResult.data
       commit('changeToken', token)
+      commit('changeRole', role)
       localCache.setCache('token', token)
 
       // 2.请求用户信息
-      const userInfoResult = await requestUserInfo()
+      const userInfoResult = await requestUserInfo(id)
       const userInfo = userInfoResult.data
       commit('changeUserInfo', userInfo)
       localCache.setCache('userInfo', userInfo)
 
       // 3.请求用户菜单
-      const userMenusResult = await requestUserMenus()
+      const userMenusResult = await requestUserMenus(role.roleId)
       const userMenus = userMenusResult.data
       commit('changeUserMenus', userMenus)
       localCache.setCache('userMenus', userMenus)

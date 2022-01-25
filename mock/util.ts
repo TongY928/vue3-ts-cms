@@ -66,3 +66,14 @@ export function getRequestToken({
 }: requestParams): string | undefined {
   return headers?.authorization
 }
+
+export function getUrlParams(url: string): Record<string, any> {
+  const obj = {}
+  const arr = url.split('?')[1]
+  const paramsArr = arr.split('&')
+  paramsArr.forEach((p) => {
+    const [key, val] = p.split('=')
+    obj[key] = val
+  })
+  return obj
+}

@@ -1,7 +1,6 @@
 import { createStore, Store, useStore as useVuexStore } from 'vuex'
 
 import login from './login'
-
 import { RootState, GStoreType } from './types'
 
 const store = createStore<RootState>({
